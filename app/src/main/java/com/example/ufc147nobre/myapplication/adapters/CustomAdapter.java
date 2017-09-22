@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ufc147nobre.myapplication.R;
+import com.example.ufc147nobre.myapplication.activities.MainActivity;
 import com.example.ufc147nobre.myapplication.models.Monster;
 import com.example.ufc147nobre.myapplication.utils.Utils;
 
@@ -52,19 +55,42 @@ public class CustomAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.cardview_item, parent, false);
 
-        Monster monster = monsters.get(position);
+        final Monster monster = monsters.get(position);
 
         TextView name = (TextView)
-                view.findViewById(R.id.monster_name2);
-        TextView description = (TextView)
-                view.findViewById(R.id.monster_description2);
+                view.findViewById(R.id.monster_name);
+        TextView date = (TextView)
+                view.findViewById(R.id.monster_date);
+        TextView hour = (TextView)
+                view.findViewById(R.id.monster_hour);
         ImageView image = (ImageView)
-                view.findViewById(R.id.monster_image2);
+                view.findViewById(R.id.monster_image);
+        ImageView favoriteImg = (ImageView)
+                view.findViewById(R.id.monster_favorite);
+
+        favoriteImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!monster.isFavorite()){
+                    monster.setFavorite(true);
+                }else {
+                    monster.setFavorite(false);
+                }
+                notifyDataSetChanged();
+            }
+        });
 
         name.setText(monster.getName());
-        description.setText(monster.getId());
+        date.setText(monster.getCustomDate());
+        hour.setText(monster.getCustomHour());
 
-        image.setImageResource(monster.getImgPath());
+        if (monster.isFavorite()){
+            favoriteImg.setBackgroundResource(R.drawable.ic_star_black_24dp);
+        }else {
+            favoriteImg.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
+        }
+
+        image.setImageResource(monster.getImgId());
         Utils.makeImageViewTopCrop(image,activity);
 
         return view;

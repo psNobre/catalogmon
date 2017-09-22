@@ -17,29 +17,68 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-            <ImageView
-                android:id="@+id/monster_image2"
-                android:layout_width="wrap_content"
-                android:layout_height="130dp"
-                android:src="@drawable/cthulhu"
-                android:scaleType="matrix"/>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="130dp">
+
+                <ImageView
+                    android:id="@+id/monster_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="130dp"
+                    android:src="@drawable/cthulhu"
+                    android:scaleType="matrix"/>
+
+                <ImageView
+                    android:id="@+id/monster_favorite"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_star_border_black_24dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="15dp"
+                    android:backgroundTint="@color/yellow"/>
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="300dp"
+            android:layout_height="fill_parent"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/monster_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/monster_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:text="date" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/monster_name2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:layout_margin="5dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/monster_description2"
+                android:id="@+id/monster_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:text="id"
-                android:layout_marginLeft="5dp"/>
+                android:text="hour"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
 
         </LinearLayout>
 

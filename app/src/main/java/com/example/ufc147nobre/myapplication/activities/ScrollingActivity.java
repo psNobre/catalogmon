@@ -50,6 +50,6 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        imageView.setImageResource(monster.getImgPath());
+        imageView.setImageResource(monster.getImgId());
     }
 }
