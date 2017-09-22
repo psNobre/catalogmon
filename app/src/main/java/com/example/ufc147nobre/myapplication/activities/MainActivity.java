@@ -2,8 +2,10 @@ package com.example.ufc147nobre.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
+    private ImageView navMenu;
     private CustomAdapter adapter;
 
     @Override
@@ -30,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         listView = (ListView) findViewById(R.id.listView);
+        navMenu = (ImageView) findViewById(R.id.nav_menu);
     }
 
     @Override
@@ -52,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        navMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "It's coming soon", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private List<Monster> getMonstersList(){
@@ -68,5 +80,11 @@ public class MainActivity extends AppCompatActivity {
         monsters.add(monster5);
 
         return monsters;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }

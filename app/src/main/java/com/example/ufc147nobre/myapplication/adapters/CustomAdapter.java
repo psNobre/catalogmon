@@ -86,6 +86,7 @@ public class CustomAdapter extends BaseAdapter {
 
         if (monster.isFavorite()){
             favoriteImg.setBackgroundResource(R.drawable.ic_star_black_24dp);
+            favoriteImg.setBackgroundTintList(activity.getResources().getColorStateList(R.color.yellow));
         }else {
             favoriteImg.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
         }
