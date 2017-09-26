@@ -5,17 +5,21 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ufc147nobre.myapplication.R;
 import com.example.ufc147nobre.myapplication.adapters.CustomAdapter;
+import com.example.ufc147nobre.myapplication.adapters.NavigationAdapter;
 import com.example.ufc147nobre.myapplication.models.Monster;
+import com.example.ufc147nobre.myapplication.models.NavigationItem;
+import com.example.ufc147nobre.myapplication.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +27,27 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
+    private ListView navListView;
     private ImageView navMenu;
     private CustomAdapter adapter;
+    private NavigationAdapter navigationAdapter;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.navigation_drawer);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         listView = (ListView) findViewById(R.id.listView);
+
         navMenu = (ImageView) findViewById(R.id.nav_menu);
+        navListView = (ListView) findViewById(R.id.left_drawer);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     @Override
@@ -44,9 +55,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         final List<Monster> monsters = getMonstersList();
+        final List<NavigationItem> navigationItems = Utils.getNavList();
 
         adapter = new CustomAdapter(monsters, this);
         listView.setAdapter(adapter);
+
+        navigationAdapter = new NavigationAdapter(navigationItems, this);
+        navListView.setAdapter(navigationAdapter);
 
         final Intent intent = new Intent(this, ScrollingActivity.class);
 
@@ -61,7 +76,25 @@ public class MainActivity extends AppCompatActivity {
         navMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "It's coming soon", Toast.LENGTH_SHORT).show();
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                drawerLayout.closeDrawer(Gravity.LEFT);
+
+                if (navigationItems.get(position).getIconId() == R.drawable.ic_home_black_24dp){
+                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_LONG).show();
+
+                } else if (navigationItems.get(position).getIconId() == R.drawable.ic_star_black_24dp){
+                    Toast.makeText(MainActivity.this, "Favoritos", Toast.LENGTH_LONG).show();
+
+                } else if (navigationItems.get(position).getIconId() == R.drawable.ic_help_outline_black_24dp){
+                    Toast.makeText(MainActivity.this, "Help", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
     }
@@ -85,6 +118,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.version:
+                Toast.makeText(MainActivity.this, "Version 1.0.0", Toast.LENGTH_LONG).show();
+                break;
+        }
         return true;
     }
 }
