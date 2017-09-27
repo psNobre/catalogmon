@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.ufc147nobre.myapplication.R;
 import com.example.ufc147nobre.myapplication.activities.MainActivity;
 import com.example.ufc147nobre.myapplication.models.Monster;
+import com.example.ufc147nobre.myapplication.persistence.DataBaseController;
 import com.example.ufc147nobre.myapplication.utils.Utils;
 
 import java.util.List;
@@ -76,13 +77,17 @@ public class CustomAdapter extends BaseAdapter {
                 }else {
                     monster.setFavorite(false);
                 }
+
+                DataBaseController dataBaseController = new DataBaseController(activity);
+                dataBaseController.updateMonster(monster);
+
                 notifyDataSetChanged();
             }
         });
 
         name.setText(monster.getName());
-        date.setText(monster.getCustomDate());
-        hour.setText(monster.getCustomHour());
+        date.setText(monster.getCustomDate(monster.getUpdateDate()));
+        hour.setText(monster.getCustomHour(monster.getUpdateDate()));
 
         if (monster.isFavorite()){
             favoriteImg.setBackgroundResource(R.drawable.ic_star_black_24dp);
@@ -91,7 +96,7 @@ public class CustomAdapter extends BaseAdapter {
             favoriteImg.setBackgroundResource(R.drawable.ic_star_border_black_24dp);
         }
 
-        image.setImageResource(monster.getImgId());
+        image.setImageResource(Integer.valueOf(monster.getImgPath()));
         Utils.makeImageViewTopCrop(image,activity);
 
         return view;

@@ -1,11 +1,14 @@
 package com.example.ufc147nobre.myapplication.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Matrix;
 import android.widget.ImageView;
 
 import com.example.ufc147nobre.myapplication.R;
+import com.example.ufc147nobre.myapplication.models.Monster;
 import com.example.ufc147nobre.myapplication.models.NavigationItem;
+import com.example.ufc147nobre.myapplication.persistence.DataBaseController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,4 +36,21 @@ public class Utils {
 
         return navigationItems;
     }
+
+    public static void initDB(Context context) {
+        DataBaseController dataBaseController = new DataBaseController(context);
+
+        Monster monster1 = new Monster("Cthulhu", String.valueOf(R.drawable.cthulhu));
+        Monster monster2 = new Monster("Dagon", String.valueOf(R.drawable.dagon));
+        Monster monster3 = new Monster("Jormungandr", String.valueOf(R.drawable.jormungandr));
+        Monster monster4 = new Monster("Fenrir", String.valueOf(R.drawable.fenrir));
+        Monster monster5 = new Monster("Manticore", String.valueOf(R.drawable.manticore));
+
+        dataBaseController.insertMonster(monster1);
+        dataBaseController.insertMonster(monster2);
+        dataBaseController.insertMonster(monster3);
+        dataBaseController.insertMonster(monster4);
+        dataBaseController.insertMonster(monster5);
+    }
+
 }

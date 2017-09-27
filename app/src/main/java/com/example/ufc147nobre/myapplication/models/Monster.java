@@ -12,19 +12,32 @@ import java.util.UUID;
 
 public class Monster implements Serializable {
 
+    private int id;
     private String name;
-    private int imgId;
-    private String id;
     private boolean favorite;
+    private String imgPath;
     private String description;
-    private Date date;
+    private Date createDate;
+    private Date updateDate;
 
-    public Monster(String name, int imgId) {
+    public Monster() {
+    }
+
+    public Monster(String name, String imgPath) {
         this.name = name;
         this.favorite = false;
-        this.imgId = imgId;
-        this.id = UUID.randomUUID().toString();
-        date = new Date();
+        this.imgPath = imgPath;
+        this.description = "Default description";
+        this.createDate = new Date();
+        this.updateDate = new Date();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -35,28 +48,20 @@ public class Monster implements Serializable {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getImgId() {
-        return imgId;
-    }
-
-    public void setImgId(int imgId) {
-        this.imgId = imgId;
-    }
-
     public boolean isFavorite() {
         return favorite;
     }
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public String getDescription() {
@@ -67,20 +72,28 @@ public class Monster implements Serializable {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public String getCustomDate() {
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getCustomDate(Date date) {
         SimpleDateFormat formatDate = new SimpleDateFormat("dd, MMM yyyy");
         String dateString = formatDate.format(date);
         return dateString;
     }
-    public String getCustomHour() {
+    public String getCustomHour(Date date) {
         SimpleDateFormat formatDate = new SimpleDateFormat("hh:mm a");
         String dateString = formatDate.format(date);
         return dateString;

@@ -19,6 +19,7 @@ import com.example.ufc147nobre.myapplication.adapters.CustomAdapter;
 import com.example.ufc147nobre.myapplication.adapters.NavigationAdapter;
 import com.example.ufc147nobre.myapplication.models.Monster;
 import com.example.ufc147nobre.myapplication.models.NavigationItem;
+import com.example.ufc147nobre.myapplication.persistence.DataBaseController;
 import com.example.ufc147nobre.myapplication.utils.Utils;
 
 import java.util.ArrayList;
@@ -33,10 +34,16 @@ public class MainActivity extends AppCompatActivity {
     private NavigationAdapter navigationAdapter;
     private DrawerLayout drawerLayout;
 
+    private List<Monster> monsters;
+
+    DataBaseController dataBaseController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_drawer);
+
+        dataBaseController = new DataBaseController(getBaseContext());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,7 +61,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        final List<Monster> monsters = getMonstersList();
+        if (dataBaseController.loadMonsters() != null){
+            monsters = dataBaseController.loadMonsters();
+        }else {
+            monsters = new ArrayList<>();
+        }
+
         final List<NavigationItem> navigationItems = Utils.getNavList();
 
         adapter = new CustomAdapter(monsters, this);
@@ -89,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_LONG).show();
 
                 } else if (navigationItems.get(position).getIconId() == R.drawable.ic_star_black_24dp){
-                    Toast.makeText(MainActivity.this, "Favoritos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Favorites", Toast.LENGTH_LONG).show();
 
                 } else if (navigationItems.get(position).getIconId() == R.drawable.ic_help_outline_black_24dp){
                     Toast.makeText(MainActivity.this, "Help", Toast.LENGTH_LONG).show();
@@ -97,22 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private List<Monster> getMonstersList(){
-        Monster monster = new Monster("Cthulhu", R.drawable.cthulhu);
-        Monster monster2 = new Monster("Dagon", R.drawable.dagon);
-        Monster monster3 = new Monster("Jormungandr", R.drawable.jormungandr);
-        Monster monster4 = new Monster("Fenrir", R.drawable.fenrir);
-        Monster monster5 = new Monster("Manticore", R.drawable.manticore);
-        List<Monster> monsters = new ArrayList<>();
-        monsters.add(monster);
-        monsters.add(monster2);
-        monsters.add(monster3);
-        monsters.add(monster4);
-        monsters.add(monster5);
-
-        return monsters;
     }
 
     @Override
