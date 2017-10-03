@@ -43,7 +43,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void onAnimationRepeat(Animator animation) {
 
             }
-        }).setDuration(3000).start();
+        }).setDuration(2000).start();
 
     }
 }

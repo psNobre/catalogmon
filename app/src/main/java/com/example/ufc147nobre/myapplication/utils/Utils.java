@@ -2,6 +2,8 @@ package com.example.ufc147nobre.myapplication.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.widget.ImageView;
 
@@ -10,6 +12,7 @@ import com.example.ufc147nobre.myapplication.models.Monster;
 import com.example.ufc147nobre.myapplication.models.NavigationItem;
 import com.example.ufc147nobre.myapplication.persistence.DataBaseController;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

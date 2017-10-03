@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATA_BASE_NAME = "catalogmon.db";
-    private static final int VERSION = 3;
+    private static final int VERSION = 1;
 
     public static final String TABLE = "monsters";
 
