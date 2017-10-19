@@ -7,8 +7,11 @@ import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ufc147nobre.myapplication.R;
@@ -60,5 +63,21 @@ public class ScrollingActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         Glide.clear(imageView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.edit_monster:
+                Toast.makeText(this, "Edit Mode", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
     }
 }

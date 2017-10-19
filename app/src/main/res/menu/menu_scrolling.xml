@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ufc147nobre.myapplication.activities.ScrollingActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/edit_monster"
         android:orderInCategory="100"
+        android:icon="@drawable/ic_mode_edit_white_24dp"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>

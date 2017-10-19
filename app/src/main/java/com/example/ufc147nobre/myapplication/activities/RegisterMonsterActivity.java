@@ -33,18 +33,27 @@ import com.example.ufc147nobre.myapplication.models.Monster;
 import com.example.ufc147nobre.myapplication.persistence.DataBaseController;
 import com.example.ufc147nobre.myapplication.utils.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class RegisterMonsterActivity extends AppCompatActivity {
 
     private final int PICK_PHOTO_FOR_MONSTER = 1;
-
-    private CollapsingToolbarLayout collapsingToolbarLayout;
     private ImageView imageView;
     private DataBaseController dataBaseController;
     private EditText nameMonster;
@@ -57,7 +66,6 @@ public class RegisterMonsterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_monster);
 
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         progressBar = (ProgressBar) findViewById(R.id.progress);
         imageView = (ImageView) findViewById(R.id.default_image_view);
 
